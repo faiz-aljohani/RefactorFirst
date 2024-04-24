@@ -58,12 +58,10 @@ public class GraphDataGenerator {
                 + "      chart2.draw(data2, options);\n"
                 + "    }\n";
     }
-
-    public String generateGodClassBubbleChartData(List<RankedDisharmony> rankedDisharmonies, int maxPriority) {
-
+    public String chartDataGenerator(List<RankedDisharmony> rankedDisharmonies, int maxPriority, String headerString){
         StringBuilder chartData = new StringBuilder();
-        chartData.append("[ 'ID', 'Effort', 'Change Proneness', 'Priority', 'Priority (Visual)'], ");
-
+        
+        chartData.append(headerString);
         for (int i = 0; i < rankedDisharmonies.size(); i++) {
             RankedDisharmony rankedDisharmony = rankedDisharmonies.get(i);
             chartData.append("[");
@@ -82,32 +80,17 @@ public class GraphDataGenerator {
                 chartData.append(",");
             }
         }
-        return chartData.toString();
+    }
+
+    public String generateGodClassBubbleChartData(List<RankedDisharmony> rankedDisharmonies, int maxPriority) {
+        chartDataString = chartDataGenerator(rankedDisharmonies, maxPriority,"[ 'ID', 'Effort', 'Change Proneness', 'Priority', 'Priority (Visual)'], ");
+
+        return chartDataString;
     }
 
     public String generateCBOBubbleChartData(List<RankedDisharmony> rankedDisharmonies, int maxPriority) {
+        chartDataString = chartDataGenerator(rankedDisharmonies, maxPriority,"[ 'ID', 'Coupling Count', 'Change Proneness', 'Priority', 'Priority (Visual)'], ");
 
-        StringBuilder chartData = new StringBuilder();
-        chartData.append("[ 'ID', 'Coupling Count', 'Change Proneness', 'Priority', 'Priority (Visual)'], ");
-
-        for (int i = 0; i < rankedDisharmonies.size(); i++) {
-            RankedDisharmony rankedDisharmony = rankedDisharmonies.get(i);
-            chartData.append("[");
-            chartData.append("'");
-            chartData.append(rankedDisharmony.getFileName());
-            chartData.append("',");
-            chartData.append(rankedDisharmony.getEffortRank());
-            chartData.append(",");
-            chartData.append(rankedDisharmony.getChangePronenessRank());
-            chartData.append(",");
-            chartData.append(rankedDisharmony.getPriority());
-            chartData.append(",");
-            chartData.append(maxPriority - rankedDisharmony.getPriority());
-            chartData.append("]");
-            if (i + 1 < rankedDisharmonies.size()) {
-                chartData.append(",");
-            }
-        }
-        return chartData.toString();
+        return chartDataString;
     }
 }
