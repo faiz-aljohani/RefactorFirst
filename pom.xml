@@ -71,7 +71,10 @@
 
         <maven.core.version>3.9.4</maven.core.version>
     </properties>
-
+<properties>
+  <sonar.organization>faiz-aljohani</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+</properties>
     <modules>
         <module>test-resources</module>
         <module>change-proneness-ranker</module>
